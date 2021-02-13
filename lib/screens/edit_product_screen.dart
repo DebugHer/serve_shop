@@ -89,8 +89,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
           .editProduct(_editedProduct.id.toString(), _editedProduct);
     } else {
       try {
-//        await Provider.of<Products>(context, listen: false)
-//            .addProduct(_editedProduct);
+        await Provider.of<Products>(context, listen: false)
+            .addProduct(_editedProduct);
+        //addProduct
       } catch (error) {
         await showDialog(
           context: context,
@@ -140,6 +141,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           : Padding(
               padding: EdgeInsets.all(20),
               child: Form(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 key: _form,
                 child: ListView(
                   children: <Widget>[

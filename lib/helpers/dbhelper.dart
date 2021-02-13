@@ -71,10 +71,27 @@ class DatabaseHelper {
     );
   }
 
-  Future<void> deleteProductItem(String id) async {
-    // Get a reference to the database.
+  Future<void> insertProduct(ProductItem product) async {
+    Database db = await DatabaseHelper.instance.database;
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnId: product.id,
+      DatabaseHelper.columnName: product.name,
+      DatabaseHelper.columnDescription: product.description,
+      DatabaseHelper.columnImage: product.image,
+      DatabaseHelper.columnPrice: product.price,
+    };
+    // do the insert and get the id of the inserted row
+    int id = await db.insert(DatabaseHelper.table, row);
+    print(id);
+  }
+
+  Future<void> deleteProductItem(int id) async {
     final db = await database;
-    await db.delete(table, whereArgs: [id]);
+    await db.delete(
+      table,
+      where: "id = ?",
+      whereArgs: [id],
+    );
   }
 
 }

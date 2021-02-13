@@ -66,12 +66,29 @@ class Products with ChangeNotifier {
     }
   }
 
+  Future<void> addProduct(ProductItem product) async {
+  try{
+      final newProduct = ProductItem(
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        image: product.image,
+        id: product.id,
+      );
+      _items.add(newProduct);
+      DatabaseHelper.instance.insertProduct(product);
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
+  }
+
 
   Future<void> deleteProduct(String id) async {
     final productIndex = _items.indexWhere((prod) => prod.id.toString() == id);
     if (productIndex > -1) {
-      DatabaseHelper.instance.deleteProductItem(id).then((value) => {
-//        _items[productIndex] = product,
+      DatabaseHelper.instance.deleteProductItem(int.tryParse(id)).then((value) => {
+        _items.removeAt(productIndex),
         notifyListeners()
       });
     }
@@ -108,6 +125,7 @@ class Products with ChangeNotifier {
               id: value[i]['id'],
               name: value[i]['name'],
               image: value[i]['image'],
+              price: value[i]['price'],
               description: value[i]['description']);
         })
       }).then((value) =>

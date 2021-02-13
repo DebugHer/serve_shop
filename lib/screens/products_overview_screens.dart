@@ -25,7 +25,7 @@ class ProductsOverviewScreen extends StatefulWidget {
 }
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
-  List<ProductItem>  _list;
+  List<ProductItem> _list;
   final TextEditingController _searchQuery = new TextEditingController();
   bool _showOnlyFavourites = false;
   bool _isInit = true;
@@ -64,31 +64,47 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 
   @override
   void didChangeDependencies() {
-    PreferenceHelper().getIsCached().then((value) => {hasLoadedIntoDb = value});
-    if (_isInit) {
-      _isLoading = true;
-      if (!hasLoadedIntoDb) {
-        Provider.of<Products>(context).fetchAndSetProducts().then((products) {
-          setState(() {
-            _isLoading = false;
-            for (int i = 0; i < products.length; i++) {
-              print(products[i].id);
-              _insertProduct(products[i]);
-            }
-            PreferenceHelper().isCached();
-            //hasLoadedIntoDb = true;
-          });
-        });
-      } else {
-        //fetch data from db
-        Provider.of<Products>(context).fetchFromDb().then((value) => {
-              setState(() {
-                _isLoading = false;
-              })
+    print('Here oo');
+    PreferenceHelper()
+        .getIsCached()
+        .then((value) => {hasLoadedIntoDb = value})
+        .then((value) => {
+          print('Has Loaded $hasLoadedIntoDb'),
+              if (_isInit)
+                {
+                  _isLoading = true,
+                  if (!hasLoadedIntoDb)
+                    {
+                      print('Fetch from api'),
+                      Provider.of<Products>(context, listen: false)
+                          .fetchAndSetProducts()
+                          .then((products) {
+                        setState(() {
+                          _isLoading = false;
+                          for (int i = 0; i < products.length; i++) {
+                            print(products[i].id);
+                            _insertProduct(products[i]);
+                          }
+                          PreferenceHelper().isCached();
+                          //hasLoadedIntoDb = true;
+                        });
+                      })
+                    }
+                  else
+                    {
+                      print('Fetch from db'),
+                      Provider.of<Products>(context, listen: false)
+                          .fetchFromDb()
+                          .then((value) => {
+                                setState(() {
+                                  _isLoading = false;
+                                })
+                              })
+                    }
+                },
+    _isInit = false
             });
-      }
-    }
-    _isInit = false;
+
     super.didChangeDependencies();
   }
 
@@ -110,7 +126,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   Widget build(BuildContext context) {
     productsData = Provider.of<Products>(context);
     var products = _isSearching ? _buildSearchList() : _buildList();
-   // final products = productsData.items;
+    // final products = productsData.items;
     return Scaffold(
       appBar: AppBar(
         title: appBarTitle,
@@ -122,12 +138,12 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                 if (this.actionIcon.icon == Icons.search) {
                   this.actionIcon = new Icon(
                     Icons.close,
-                    color: Colors.orange,
+                    color: Colors.white,
                   );
                   this.appBarTitle = new TextField(
                     controller: _searchQuery,
                     style: new TextStyle(
-                      color: Colors.orange,
+                      color: Colors.white,
                     ),
                     decoration: new InputDecoration(
                         hintText: "Search here..",
@@ -140,18 +156,18 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
               });
             },
           ),
-          Consumer<Cart>(
-            builder: (_, cart, ch) => Badge(
-              child: ch,
-              value: cart.itemCount.toString(),
-            ),
-            child: IconButton(
-              icon: Icon(Icons.shopping_basket),
-              onPressed: () {
-                Navigator.of(context).pushNamed(CartScreen.route);
-              },
-            ),
-          ),
+//          Consumer<Cart>(
+//            builder: (_, cart, ch) => Badge(
+//              child: ch,
+//              value: cart.itemCount.toString(),
+//            ),
+//            child: IconButton(
+//              icon: Icon(Icons.shopping_basket),
+//              onPressed: () {
+//                Navigator.of(context).pushNamed(CartScreen.route);
+//              },
+//            ),
+//          ),
         ],
       ),
       drawer: AppDrawer(),
@@ -180,8 +196,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   List<ProductItem> _buildSearchList() {
     if (_searchText.isEmpty) {
       return productsData.items;
-    }
-    else {
+    } else {
       List<ProductItem> _searchList = List();
       _list = productsData.items;
       for (int i = 0; i < _list.length; i++) {
@@ -190,13 +205,14 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           _searchList.add(_list.elementAt(i));
         }
       }
-      return _searchList.map((product) => new ProductItem(
-          id: product.id,
-          name: product.name,
-          description: product.description,
-          price: product.price,
-          image: product.image
-      )).toList();
+      return _searchList
+          .map((product) => new ProductItem(
+              id: product.id,
+              name: product.name,
+              description: product.description,
+              price: product.price,
+              image: product.image))
+          .toList();
     }
   }
 

@@ -48,31 +48,31 @@ class ProductItemWidget extends StatelessWidget {
               backgroundColor: Colors.redAccent,
               title: Text(
                 product.name,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyText1,
+                textAlign: TextAlign.start,
+                style: TextStyle(color: Colors.white, fontSize: 12)
               ),
-              trailing: IconButton(
-                icon: Icon(Icons.shopping_cart),
-                onPressed: () {
-                  cart.addItem(
-                    product.id.toString(),
-                    double.tryParse(product.price),
-                    product.name,
-                  );
-                  Scaffold.of(context).hideCurrentSnackBar();
-                  Scaffold.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Added item to cart'),
-                      action: SnackBarAction(
-                        label: 'Undo',
-                        onPressed: () {
-                          cart.removeSingleItem(product.id.toString());
-                        },
-                      ),
-                    ),
-                  );
-                },
-              ),
+//              trailing: IconButton(
+//                icon: Icon(Icons.shopping_cart),
+//                onPressed: () {
+//                  cart.addItem(
+//                    product.id.toString(),
+//                    double.tryParse(product.price),
+//                    product.name,
+//                  );
+//                  Scaffold.of(context).hideCurrentSnackBar();
+//                  Scaffold.of(context).showSnackBar(
+//                    SnackBar(
+//                      content: Text('Added item to cart'),
+//                      action: SnackBarAction(
+//                        label: 'Undo',
+//                        onPressed: () {
+//                          cart.removeSingleItem(product.id.toString());
+//                        },
+//                      ),
+//                    ),
+//                  );
+//                },
+//              ),
             ),
           ),
         ),
