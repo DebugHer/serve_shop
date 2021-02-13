@@ -6,9 +6,8 @@ import '../providers/products.dart';
 import './product_item.dart';
 
 class ProductsGrid extends StatelessWidget {
-  
-  final bool showFavourites;
-  ProductsGrid(this.showFavourites);
+
+  ProductsGrid();
 
   @override
   Widget build(BuildContext context) {

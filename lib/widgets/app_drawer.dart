@@ -11,17 +11,17 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: <Widget>[
-//          Container(
-//            height: 200,
-//            padding: EdgeInsets.all(20),
-//            width: double.infinity,
-//            alignment: Alignment.bottomRight,
-//            color: Theme.of(context).primaryColor,
+          Container(
+            height: 150,
+            padding: EdgeInsets.all(20),
+            width: double.infinity,
+            alignment: Alignment.bottomRight,
+            color: Theme.of(context).primaryColor,
 //            child: Text(
-//              'Hey, User',
-//              style: Theme.of(context).textTheme.headline1,
+//              'Server Shop',
+//              style: Theme.of(context).textTheme.headline5,
 //            ),
-//          ),
+          ),
           ListTile(
             leading: Icon(Icons.shop),
             title: Text(

@@ -25,12 +25,22 @@ class AuthScreen extends StatelessWidget {
               height: deviceSize.height,
               width: deviceSize.width,
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: Colors.white,
               ),
               padding: EdgeInsets.only(top: 200, left: 20),
-              child: Text(
-                'Shop App',
-                style: Theme.of(context).textTheme.headline1,
+              child: Column(
+                children: [
+                  Container(
+                      child: Image.asset("assets/images/serve.png"),
+                    height: 150,
+                    width: 150,
+                  ),
+
+//                  Text(
+//                    'Serve Shop',
+//                    style: TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold),
+//                  ),
+                ],
               ),
             ),
             Container(
@@ -104,7 +114,7 @@ class _AuthCardState extends State<AuthCard>
         content: Text(
           message,
           style: TextStyle(
-            color: Colors.grey,
+            color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 15,
           ),
@@ -178,13 +188,14 @@ class _AuthCardState extends State<AuthCard>
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      height: _authMode == AuthMode.Login ? 350 : 400,
+
+      height: _authMode == AuthMode.Login ? 450 : 550,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
         ),
-        color: Colors.white,
+        color: Colors.red.withOpacity(0.4),
       ),
       duration: Duration(milliseconds: 500),
       curve: Curves.elasticInOut,
@@ -202,7 +213,7 @@ class _AuthCardState extends State<AuthCard>
                   prefixIcon: Icon(Icons.email),
                   hintText: 'E-Mail',
                   filled: true,
-                  fillColor: Color(0xffdadada),
+                  fillColor: Colors.white,
                   border: new OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(30),
@@ -228,7 +239,7 @@ class _AuthCardState extends State<AuthCard>
                   prefixIcon: Icon(Icons.lock),
                   hintText: 'Password',
                   filled: true,
-                  fillColor: Color(0xffdadada),
+                  fillColor: Colors.white,
                   border: new OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(30),
@@ -259,7 +270,7 @@ class _AuthCardState extends State<AuthCard>
                       prefixIcon: Icon(Icons.lock),
                       hintText: 'Confirm Password',
                       filled: true,
-                      fillColor: Color(0xffdadada),
+                      fillColor: Colors.white,
                       border: new OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(30),
@@ -292,8 +303,8 @@ class _AuthCardState extends State<AuthCard>
                   ),
                   padding:
                       EdgeInsets.symmetric(horizontal: 40.0, vertical: 15.0),
-                  color: Theme.of(context).primaryColor,
-                  textColor: Theme.of(context).primaryTextTheme.button.color,
+                  color: Colors.white,
+                  textColor: Colors.red,
                 ),
               SizedBox(
                 height: 10,
@@ -304,7 +315,7 @@ class _AuthCardState extends State<AuthCard>
                 onPressed: _switchAuthMode,
                 padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 4),
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                textColor: Theme.of(context).primaryColor,
+                textColor: Colors.white,
               ),
               SizedBox(
                 height: 30,

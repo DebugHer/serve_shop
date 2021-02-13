@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:servetest/helpers/dbhelper.dart';
 import 'package:servetest/models/products.dart';
 
 import '../models/http_exception.dart';
-import './product.dart';
 
 class Products with ChangeNotifier {
   List<ProductItem> _items = [
@@ -52,104 +52,51 @@ class Products with ChangeNotifier {
     return [..._items];
   }
 
-//  List<Product> get favouriteItems {
-//    return _items.where((product) => product.isFavourite).toList();
-//  }
 
-//  Product findById(String id) {
-//    return _items.firstWhere((product) => product.id == id);
-//  }
-
-  Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
+  Future<List<ProductItem>> fetchAndSetProducts(
+      [bool filterByUser = false]) async {
     var url =
         'https://gorest.co.in/public-api/products';
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
-      final List<ProductItem> loadedProducts = productsFromJson(response.body).data;
+      final List<ProductItem> loadedProducts = productsFromJson(response.body)
+          .data;
       if (extractedData == null) {
-        return;
+        return null;
       }
-//      url =
-//          'https://gorest.co.in/public-api/products';
-//      final favouriteResponse = await http.get(url);
-//      final favouriteData = json.decode(favouriteResponse.body);
-//      extractedData.forEach((productId, product) {
-//        loadedProducts.add(ProductItem(
-//          id: int.tryParse(productId),
-//          name: product['name'],
-//          description: product['description'],
-//          price: product['price'],
-//          status:
-//              favouriteData == null ? false : favouriteData[productId] ?? false,
-//          image: product['image'],
-//        ));
-//      });
       _items = loadedProducts;
       notifyListeners();
+      return _items;
     } catch (error) {
       throw error;
     }
   }
 
-//  Future<void> addProduct(ProductItem product) async {
-//    final url =
-//        'https://udemy-shop-app-72c1c.firebaseio.com/products.json?auth=$authToken';
-//    try {
-//      final response = await http.post(
-//        url,
-//        body: json.encode({
-//          'title': product.title,
-//          'description': product.description,
-//          'imageUrl': product.imageUrl,
-//          'price': product.price,
-//          'creatorId': userId,
-//        }),
-//      );
-//      final newProduct = Product(
-//        title: product.title,
-//        description: product.description,
-//        price: product.price,
-//        imageUrl: product.imageUrl,
-//        id: json.decode(response.body)['name'],
-//      );
-//      _items.add(newProduct);
-//      notifyListeners();
-//    } catch (error) {
-//      throw error;
-//    }
-//  }
-//
-//  Future<void> editProduct(String id, Product product) async {
-//    final productIndex = _items.indexWhere((prod) => prod.id == id);
-//    if (productIndex > -1) {
-//      final url =
-//          'https://udemy-shop-app-72c1c.firebaseio.com/products/$id.json?auth=$authToken';
-//      await http.patch(url,
-//          body: json.encode({
-//            'title': product.title,
-//            'description': product.description,
-//            'imageUrl': product.imageUrl,
-//            'price': product.price,
-//          }));
-//      _items[productIndex] = product;
-//      notifyListeners();
-//    }
-//  }
+  Future<List<ProductItem>> fetchFromDb() async {
+    List<ProductItem> productList;
+    try {
+      var rows = DatabaseHelper.instance.queryAllRows().then((value) =>
+      {
+        print('Rows oo ${value.length}'),
+        productList = List.generate(value.length, (i) {
+          return ProductItem(
+              id: value[i]['id'],
+              name: value[i]['name'],
+              image: value[i]['image'],
+              description: value[i]['description']);
+        })
+      }).then((value) =>
+      {
+        print('Prods ${productList.length}'),
+        _items = productList,
+        notifyListeners()
+      });
 
-//  Future<void> deleteProduct(String id) async {
-//    final url =
-//        'https://udemy-shop-app-72c1c.firebaseio.com/products/$id.json?auth=$authToken';
-//    final existingProductIndex = _items.indexWhere((prod) => prod.id == id);
-//    var existingProduct = _items[existingProductIndex];
-//    _items.removeAt(existingProductIndex);
-//    notifyListeners();
-//    final response = await http.delete(url);
-//    if (response.statusCode >= 400) {
-//      _items.insert(existingProductIndex, existingProduct);
-//      notifyListeners();
-//      throw HttpException('Could not delete product');
-//    }
-//    existingProduct = null;
-//  }
-}
+    }
+
+      //print('Prods ${productList.length}');
+          catch(error) {
+  throw error;
+  }
+}}

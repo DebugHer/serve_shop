@@ -6,12 +6,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-Products productsFromJson(String str) => Products.fromJson(json.decode(str));
+ProductsResponse productsFromJson(String str) => ProductsResponse.fromJson(json.decode(str));
 
-String productsToJson(Products data) => json.encode(data.toJson());
+String productsToJson(ProductsResponse data) => json.encode(data.toJson());
 
-class Products {
-  Products({
+class ProductsResponse {
+  ProductsResponse({
     this.code,
     this.meta,
     this.data,
@@ -21,7 +21,7 @@ class Products {
   Meta meta;
   List<ProductItem> data;
 
-  factory Products.fromJson(Map<String, dynamic> json) => Products(
+  factory ProductsResponse.fromJson(Map<String, dynamic> json) => ProductsResponse(
     code: json["code"],
     meta: Meta.fromJson(json["meta"]),
     data: List<ProductItem>.from(json["data"].map((x) => ProductItem.fromJson(x))),

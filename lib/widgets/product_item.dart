@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:servetest/models/products.dart';
 
 //import '../screens/product_details_screen.dart';
-import '../providers/product.dart';
 import '../providers/cart.dart';
 import '../providers/auth.dart';
 
