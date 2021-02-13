@@ -1,16 +1,14 @@
 # servetest
 
-A new Flutter application.
+Serve Shop App.
 
-## Getting Started
+![Simulator Screen Shot - iPhone 12 Pro Max - 2021-02-13 at 17 56 13](https://user-images.githubusercontent.com/37479633/107856073-15e3df00-6e26-11eb-81ba-264879838f6d.png)
 
-This project is a starting point for a Flutter application.
+![Simulator Screen Shot - iPhone 12 Pro Max - 2021-02-13 at 17 56 10](https://user-images.githubusercontent.com/37479633/107856107-4a579b00-6e26-11eb-8af4-4c979af29295.png)
 
-A few resources to get you started if this is your first Flutter project:
+![Simulator Screen Shot - iPhone 12 Pro Max - 2021-02-13 at 17 55 45](https://user-images.githubusercontent.com/37479633/107856115-55aac680-6e26-11eb-889b-848eabf8df94.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+![Simulator Screen Shot - iPhone 12 Pro Max - 2021-02-13 at 18 08 56](https://user-images.githubusercontent.com/37479633/107856174-c520b600-6e26-11eb-9535-4f366f13eb37.png)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Simulator Screen Shot - iPhone 12 Pro Max - 2021-02-13 at 18 09 08](https://user-images.githubusercontent.com/37479633/107856163-b1754f80-6e26-11eb-8e3e-be2e7f547b39.png)
+
