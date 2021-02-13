@@ -52,6 +52,19 @@ class Products with ChangeNotifier {
     return [..._items];
   }
 
+  ProductItem findById(String id) {
+    return _items.firstWhere((product) => product.id.toString() == id);
+  }
+
+  Future<void> editProduct(String id, ProductItem product) async {
+    final productIndex = _items.indexWhere((prod) => prod.id.toString() == id);
+    if (productIndex > -1) {
+      DatabaseHelper.instance.updateProductItem(product).then((value) => {
+      _items[productIndex] = product,
+          notifyListeners()
+      });
+    }
+  }
 
   Future<List<ProductItem>> fetchAndSetProducts(
       [bool filterByUser = false]) async {

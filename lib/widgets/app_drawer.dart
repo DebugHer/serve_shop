@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:servetest/screens/user_products_screen.dart';
 
 //import '../screens/orders_screen.dart';
 //import '../screens/user_products_screen.dart';
@@ -32,19 +33,19 @@ class AppDrawer extends StatelessWidget {
               Navigator.of(context).pushReplacementNamed('/');
             },
           ),
-          Divider(
-            height: 0,
-          ),
-          ListTile(
-            leading: Icon(Icons.payment),
-            title: Text(
-              'Orders',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            onTap: () {
-             // Navigator.of(context).pushReplacementNamed(OrdersScreen.route);
-            },
-          ),
+//          Divider(
+//            height: 0,
+//          ),
+//          ListTile(
+//            leading: Icon(Icons.payment),
+//            title: Text(
+//              'Orders',
+//              style: Theme.of(context).textTheme.headline4,
+//            ),
+//            onTap: () {
+//             // Navigator.of(context).pushReplacementNamed(OrdersScreen.route);
+//            },
+//          ),
           Divider(
             height: 0,
           ),
@@ -55,8 +56,8 @@ class AppDrawer extends StatelessWidget {
               style: Theme.of(context).textTheme.headline4,
             ),
             onTap: () {
-//              Navigator.of(context)
-//                  .pushReplacementNamed(UserProductsScreen.route);
+              Navigator.of(context)
+                  .pushReplacementNamed(UserProductsScreen.route);
             },
           ),
           Divider(

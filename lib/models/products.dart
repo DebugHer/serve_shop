@@ -41,9 +41,6 @@ class ProductItem with ChangeNotifier  {
     this.description,
     this.image,
     this.price,
-    this.discountAmount,
-    this.status,
-    this.categories,
   });
 
   int id;
@@ -51,9 +48,9 @@ class ProductItem with ChangeNotifier  {
   String description;
   String image;
   String price;
-  String discountAmount;
-  bool status;
-  List<Category> categories;
+//  String discountAmount;
+//  bool status;
+//  List<Category> categories;
 
   factory ProductItem.fromJson(Map<String, dynamic> json) => ProductItem(
     id: json["id"],
@@ -61,9 +58,9 @@ class ProductItem with ChangeNotifier  {
     description: json["description"],
     image: json["image"],
     price: json["price"],
-    discountAmount: json["discount_amount"],
-    status: json["status"],
-    categories: List<Category>.from(json["categories"].map((x) => Category.fromJson(x))),
+//    discountAmount: json["discount_amount"],
+//    status: json["status"],
+//    categories: List<Category>.from(json["categories"].map((x) => Category.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -72,10 +69,10 @@ class ProductItem with ChangeNotifier  {
     "description": description,
     "image": image,
     "price": price,
-    "discount_amount": discountAmount,
-    "status": status,
-    "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
+//    "discount_amount": discountAmount,
+//    "status": status,
   };
+  //"categories": List<dynamic>.from(categories.map((x) => x.toJson()))
 }
 
 class Category {

@@ -4,8 +4,11 @@ import 'package:servetest/providers/auth.dart';
 import 'package:servetest/providers/cart.dart';
 import 'package:servetest/providers/products.dart';
 import 'package:servetest/screens/auth_screen.dart';
+import 'package:servetest/screens/cart_screen.dart';
+import 'package:servetest/screens/edit_product_screen.dart';
 import 'package:servetest/screens/products_overview_screens.dart';
 import 'package:servetest/screens/splash_screen.dart';
+import 'package:servetest/screens/user_products_screen.dart';
 
 import 'helpers/custom_route.dart';
 import 'providers/orders.dart';
@@ -89,10 +92,10 @@ class MyApp extends StatelessWidget {
           ),
           routes: {
 //            ProductDetailsScreen.route: (context) => ProductDetailsScreen(),
-//            CartScreen.route: (context) => CartScreen(),
+            CartScreen.route: (context) => CartScreen(),
 //            OrdersScreen.route: (context) => OrdersScreen(),
-//            UserProductsScreen.route: (context) => UserProductsScreen(),
-//            EditProductScreen.route: (context) => EditProductScreen(),
+            UserProductsScreen.route: (context) => UserProductsScreen(),
+            EditProductScreen.route: (context) => EditProductScreen(),
           },
         ),
       ),

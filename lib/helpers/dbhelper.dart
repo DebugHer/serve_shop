@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:path/path.dart';
+import 'package:servetest/models/products.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart' show getApplicationDocumentsDirectory;
 
@@ -58,4 +59,16 @@ class DatabaseHelper {
     Database db = await instance.database;
     return await db.query(table);
   }
+
+  Future<void> updateProductItem(ProductItem productItem) async {
+    // Get a reference to the database.
+    final db = await database;
+    await db.update(
+      table,
+      productItem.toJson(),
+      where: "id = ?",
+      whereArgs: [productItem.id],
+    );
+  }
+
 }
