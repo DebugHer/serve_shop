@@ -67,7 +67,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
     PreferenceHelper().getIsCached().then((value) => {hasLoadedIntoDb = value});
     if (_isInit) {
       _isLoading = true;
-      if (hasLoadedIntoDb) {
+      if (!hasLoadedIntoDb) {
         Provider.of<Products>(context).fetchAndSetProducts().then((products) {
           setState(() {
             _isLoading = false;
@@ -101,6 +101,9 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       DatabaseHelper.columnImage: product.image,
       DatabaseHelper.columnPrice: product.price,
     };
+    // do the insert and get the id of the inserted row
+    int id = await db.insert(DatabaseHelper.table, row);
+    print(id);
   }
 
   @override

@@ -71,4 +71,10 @@ class DatabaseHelper {
     );
   }
 
+  Future<void> deleteProductItem(String id) async {
+    // Get a reference to the database.
+    final db = await database;
+    await db.delete(table, whereArgs: [id]);
+  }
+
 }

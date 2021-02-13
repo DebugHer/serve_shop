@@ -66,6 +66,17 @@ class Products with ChangeNotifier {
     }
   }
 
+
+  Future<void> deleteProduct(String id) async {
+    final productIndex = _items.indexWhere((prod) => prod.id.toString() == id);
+    if (productIndex > -1) {
+      DatabaseHelper.instance.deleteProductItem(id).then((value) => {
+//        _items[productIndex] = product,
+        notifyListeners()
+      });
+    }
+  }
+
   Future<List<ProductItem>> fetchAndSetProducts(
       [bool filterByUser = false]) async {
     var url =
